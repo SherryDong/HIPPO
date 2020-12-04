@@ -33,6 +33,6 @@ bedtools intersect -a $result/$sample_name.output.bed -b $combine_ref_dir/combin
 perl src/seq2matrix.pl $result/$sample_name.fa $result/$sample_name.overlap $result/$sample_name.mat
 
 # Step3: functional/pseudogene haplotype imputation and result visualization
-Rscript src/pipeline_draw.R $result/$sample_name.mat $result/combine_mod_region.bed $result/combine_mod.info 66459316,66459273,66459256,66459197,66459075,66459073 $result/$sample_name.res.pdf  $result/$sample_name.res.txt 
+Rscript src/pipeline_draw.R $result/$sample_name.mat $combine_ref_dir/combine_mod_region.bed $combine_ref_dir/combine_mod.info 66459316,66459273,66459256,66459197,66459075,66459073 $result/$sample_name.res.pdf  $result/$sample_name.res.txt
 
 
