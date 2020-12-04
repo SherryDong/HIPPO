@@ -5,6 +5,10 @@ HIPPO (**H**aplotype **I**m**P**utation for **P**seudogene-mediated c**O**nversi
 
 # Require
 
+```seqtk >= 1.3-r106```
+
+```bedtools >= v2.27.1```
+
 ```muscle >= v3.8.31```
 
 ```samtools >= v1.8```
@@ -29,10 +33,15 @@ demo.sh
 + Part II: generate reads-region mapping content matrix
 
   Step2_demo.sh
+  
+  # 
 
 + Part III: functional/pseudogene haplotype imputation and result visualization 
 
   Step3_demo.R
+  
+  # Rscript src/pipeline_draw.R
+  # usage: Rscript src/pipeline_draw.R <read-region matrix> <combine_mod_region.bed> <combine_mod.info> <interested position> <output pdf file name> <output txt file name>
 
 # Reference
 
