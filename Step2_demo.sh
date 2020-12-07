@@ -23,7 +23,7 @@ region_pseudo=`awk -F "\t" {'print "chr"$1":"$2"-"$3'} $combine_ref_dir/$pseudo_
 # for each sample
 samtools view -h $bam_file $region_true $region_pseudo >$result/$sample_name.sam
 samtools fasta $result/$sample_name.sam >$result/$sample_name.fa
-/cluster/apps/software/blat/blat $combine_ref_dir/combine_mod.fa $result/$sample_name.fa $result/$sample_name.output.psl
+blat $combine_ref_dir/combine_mod.fa $result/$sample_name.fa $result/$sample_name.output.psl
 awk -F " " {'print "chr\t"$16"\t"$17"\t"$10"\t.\t"$9"\t"$12"\t"$13'} $result/$sample_name.output.psl | sed '1,5d' >$result/$sample_name.output.bed
 bedtools intersect -a $result/$sample_name.output.bed -b $combine_ref_dir/combine_mod_region.bed -wo >$result/$sample_name.overlap
 perl src/seq2matrix.pl $result/$sample_name.fa $result/$sample_name.overlap $result/$sample_name.mat
