@@ -160,7 +160,7 @@ HIPPO.plot_readsComponent <- function(all_mat,group_info=NULL,
 }
 
 ###########################################
-#' Plot read positional-components
+#' Plot adjacent combination of genotypes
 #'
 #' \code{HIPPO.plot_adjacentCombination} plot reads component for each position.
 #'
@@ -543,6 +543,7 @@ HIPPO.impute_Haplotype <- function(all_mat,group_info,top_each=3,use_site=NULL,
     }
     all_prob <- do.call(rbind,all_prob) ## just for test
     new_prob[which(new_prob<min_frequency)] <- 0; ## remove lowest frequency
+    final_t$support_read <- nrow(read2hap)*new_prob;
     new_prob <- new_prob/sum(new_prob); 
     w1 <- which(new_prob>0); w1 <- w1[order(new_prob[w1],decreasing = T)]
     final_t$prob <- new_prob[w1]
@@ -552,6 +553,7 @@ HIPPO.impute_Haplotype <- function(all_mat,group_info,top_each=3,use_site=NULL,
       final_t$record[[i]][max_t] <- i
     }
     final_t$seq <- final_t$seq[w1]
+    final_t$support_read <- final_t$support_read[w1]
     result_t[[max_t]] <- final_t
   }
   ## output
@@ -723,10 +725,11 @@ HIPPO.output_result <- function(res_readsComponent,
   ## output site probability
   final_res_trace <- do.call(rbind,lapply(1:length(res_finalHaplotype$seq),function(i){
     cbind(rbind(res_finalHaplotype$seq[[i]],res_finalHaplotype$trace[[i]]),
-          signif(res_finalHaplotype$prob[[i]],3))
+          signif(res_finalHaplotype$prob[[i]],3),res_finalHaplotype$support_read[i])
   }))
-  colnames(final_res_trace)[ncol(final_res_trace)] <- 'Support_Percentage'
-  colnames(final_res_trace)[1:(ncol(final_res_trace)-1)] <- group_name
+  colnames(final_res_trace)[ncol(final_res_trace)] <- 'Support_Read'
+  colnames(final_res_trace)[ncol(final_res_trace)-1] <- 'Support_Percentage'
+  colnames(final_res_trace)[1:(ncol(final_res_trace)-2)] <- group_name
   write.table(final_res_trace,file=gsub(".txt$","_haplotype.txt",output_file),
               row.names = T,col.names = T,quote = F,sep='\t')
   ## output site probability
