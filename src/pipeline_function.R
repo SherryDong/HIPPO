@@ -110,7 +110,7 @@ sankey_polygon <- function(Fx0, Fx1, Fy0, Fy1,Sx0, Sx1, Sy0, Sy1,
 #'
 #' @param all_mat data.frame, read-region content matrix with interested positions.
 #' @param remove_char character, character for none matching sequence content, default is ".". 
-#' @param group_info data.frame, sequence context at each position for true and pseudogene. 
+#' @param group_info data.frame, sequence context at each position for parental and pseudogene. 
 #' @param group_name character, genome position for each interested positions. 
 #'
 #' @examples
@@ -172,7 +172,7 @@ HIPPO.plot_readsComponent <- function(all_mat,group_info=NULL,
 #' Default is 0.1.
 #' @param part_thre numeric, threshold for the percentage of each intersected sequence context to the total number of start-side valid sequence. 
 #' Default is 0.1.
-#' @param group_info data.frame, sequence context at each position for true and pseudogene. 
+#' @param group_info data.frame, sequence context at each position for parental and pseudogene. 
 #' @param only_use_group logical, if true, sequence not match group_info will not be plotted. Default is FALSE.
 #' @param group_name character, genome position for each interested positions. 
 #' @param strategy character, choose from 'percentage' and 'count'. 
@@ -299,7 +299,7 @@ HIPPO.plot_adjacentCombination <- function(all_mat,top_n=3,each_width=0.25,
 #' \code{HIPPO.summ_readsComponent} plot reads component for each position.
 #'
 #' @param all_mat data.frame, read-region content matrix with interested positions.
-#' @param group_info data.frame, sequence context at each position for true and pseudogene. 
+#' @param group_info data.frame, sequence context at each position for parental and pseudogene. 
 #' @param group_name character, genome position for each interested positions. 
 #'
 #' @examples
@@ -389,7 +389,7 @@ compare_twoSeq_count <- function(x1,x2,min_overlap=2,remove_character='.'){ # x1
 #' \code{HIPPO.impute_Haplotype} perform imputation for haplotypes. 
 #'
 #' @param all_mat data.frame, read-region content matrix with interested positions.
-#' @param group_info data.frame, sequence context at each position for true and pseudogene. 
+#' @param group_info data.frame, sequence context at each position for parental and pseudogene. 
 #' @param top_each, numeric, number of top haplotypes to leave at each step. Default is 3.
 #' @param use_site, character, if not NULL, only impute for the input sites. Default is NULL. 
 #' @param min_overlap, numeric, minimun matching_score for a read assigned to a haplotype. Default is 2.  
